@@ -1,0 +1,6 @@
+## goreleaser <1.14.0
+project_name: go-gauntlet
+
+# See https://goreleaser.com/customization/build/
+builds:
+  - skip: true

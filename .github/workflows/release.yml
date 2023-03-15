@@ -1,0 +1,24 @@
+name: Release Go Gauntlet
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release-go-gauntlet:
+    runs-on: ubuntu-latest
+    environment: release
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3 # v3.1.0
+
+      - name: Build and publish release
+        uses: ./.github/actions/goreleaser-build-sign-publish
+        with:
+          enable-docker-publish: "false"
+          enable-goreleaser-snapshot: "false"
+          enable-cosign: "false"
+          goreleaser-config: .goreleaser.yaml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
